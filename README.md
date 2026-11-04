@@ -303,8 +303,7 @@ from the web page, but this project neither tests nor documents them. See the
 
 - **[PicoGamepadConverter](https://github.com/Loc15/PicoGamepadConverter)** by
   Loc15. The base this project is built on: PS1/PS2 device emulation, USB
-  modes, web configuration and the overall firmware structure. If this project
-  is useful to you, consider [supporting Loc15](https://ko-fi.com/loc15).
+  modes, web configuration and the overall firmware structure.
 - **[DreamPicoPort](https://github.com/OrangeFox86/DreamPicoPort)** by
   OrangeFox86, for the Maple bus implementation, by way of the trimmed
   host-only copy in [OGX-Mini-2026](https://github.com/MegaCadeDev/OGX-Mini-2026).
