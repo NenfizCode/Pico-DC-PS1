@@ -9,7 +9,8 @@ particular — can present it to a console.
 The Maple Bus layer comes from [DreamPicoPort](https://github.com/OrangeFox86/DreamPicoPort)
 by OrangeFox86, via the trimmed host-only copy in
 [OGX-Mini-2026](https://github.com/MegaCadeDev/OGX-Mini-2026). Both are MIT
-licensed, as is this project. `maple_in.pio`, `maple_out.pio`, `MaplePacket.hpp`,
+licensed, and DreamPicoPort's MIT notice is in [`LICENSE`](./LICENSE) in this
+folder. The rest of this project is GPL-3.0. `maple_in.pio`, `maple_out.pio`, `MaplePacket.hpp`,
 `dreamcast_constants.h`, `dreamcast_structures.h` and `maple_utils.h` are taken
 essentially unchanged.
 

@@ -1,132 +1,110 @@
 # Pico DC → PS1
 
-Play PlayStation games with a Dreamcast controller or arcade stick.
+A Raspberry Pi Pico adapter that lets you use a Dreamcast controller on a
+PlayStation. It also works as a USB controller on a PC.
 
-This is firmware and a hardware build for a Raspberry Pi Pico (RP2040) that
-reads a Dreamcast controller over the Maple bus and presents it to a PS1 or PS2
-as a standard PlayStation pad. Plug the same adapter into a PC instead and it
-becomes a USB gamepad.
-
-It is built on top of [PicoGamepadConverter](https://github.com/Loc15/PicoGamepadConverter)
-by Loc15, which provides the PlayStation device emulation, the USB gamepad
-modes and the web configuration page. This project adds a Dreamcast (Maple bus)
-input mode and fixes to the PS1 side that make it work in the console's own
-menu and in games that use the standard pad driver.
+Based on [PicoGamepadConverter](https://github.com/Loc15/PicoGamepadConverter)
+by Loc15, which already had PS1/PS2 controller emulation, USB modes and a web
+config page. This adds Dreamcast (Maple bus) input and fixes the PS1 timing so
+the BIOS and every game accept it.
 
 ![The finished adapter plugged into a PS1](./docs/media/build-finished.jpg)
 
-[![Demo video: a Dreamcast stick playing a PS1 game through the adapter](./docs/media/demo-thumb.jpg)](./docs/media/demo.mp4)
-
-*Click the image above to watch a short demo (25 seconds, no sound).*
+[![Demo video](./docs/media/demo-thumb.jpg)](./docs/media/demo.mp4)
 
 ---
 
 ## Features
 
-- **Dreamcast in, PlayStation out.** Reads a Dreamcast controller or arcade
-  stick and presents it as a PS1/PS2 digital pad (or an analog pad if you
-  choose that mode).
-- **Picks its output automatically** *(untested)*. Powered by the console,
-  it acts as a PlayStation pad. Plugged into a PC by USB, it should act as a
-  USB gamepad (Xinput by default; other USB modes can be chosen in the web
-  configuration page). The code is in place but hasn't been tried on hardware
-  yet.
-- **Powered by the console.** A 5V regulator runs off the PlayStation port's
-  7.6V rail and powers both the Pico and the Dreamcast stick. No external
-  power and no USB cable needed in the console.
-- **No level shifting.** Both the Maple bus and the PlayStation pad bus are
-  3.3V logic, so the Pico's pins connect directly.
-- **Digital/analog toggle from the stick.** Hold a button combo to switch which
-  PlayStation pad type the console sees.
-- **Status LED** showing whether the stick is detected and whether the console
-  is reading the adapter.
+- Reads a Dreamcast controller and shows up on a PS1/PS2 as a normal
+  digital pad, or an analog pad if you switch modes.
+- Runs off the console. A 5V regulator on the PS1's 7.6V line powers the Pico
+  and the Dreamcast controller, so no extra power or USB cable is needed.
+- No level shifters. The Maple bus and the PS1 pad bus are both 3.3V, so they
+  connect straight to the Pico.
+- Button combo on the controller to switch between digital and analog.
+- Status LED.
+- Should switch to USB controller mode on its own when plugged into a PC
+  instead of a console. This is written but not tested yet.
 
 ### Tested
 
-| Where | What | Result |
-|---|---|---|
-| PS1 (original "fat" model), console-powered | BIOS / startup menu and every game tried, including Soul Edge and King of Fighters '96 | Working, no known issues |
-| PC (Xinput) | Tested on PC | Worked before the automatic output switch was added; not retested since |
-| Automatic PS1 / USB switch | | Not yet tested |
-| Input | Dreamcast arcade stick | Working |
+| Setup | Result |
+|---|---|
+| PS1 (fat model), powered by the console | BIOS and every game tried work, including Soul Edge and King of Fighters '96 |
+| PC over USB (Xinput) | Works. Tested before the auto switch was added |
+| Auto switch between PS1 and USB | Not tested yet |
 
 ---
 
 ## How it works
 
 ```
-Dreamcast stick ──Maple bus──▶ Pico (RP2040) ──PS1 pad bus──▶ PlayStation
-   (GPIO 10/11)                core 0: Maple host              (GPIO 19-22, 26)
-                               core 1: PS1 pad emulation
-                                      │
-                                      └──USB──▶ PC (when plugged in)
+Dreamcast controller ──Maple bus──▶ Pico (RP2040) ──PS1 pad bus──▶ PlayStation
+   (GPIO 10/11)                     core 0: Maple host              (GPIO 19-22, 26)
+                                    core 1: PS1 pad emulation
+                                           │
+                                           └──USB──▶ PC
 ```
 
-- **Maple host.** The Pico polls the Dreamcast stick the way a Dreamcast does:
-  it asks for device info until the stick answers, then requests the
-  controller's state every 1 ms. The Maple layer comes from
-  [DreamPicoPort](https://github.com/OrangeFox86/DreamPicoPort). An RP2040 has
-  only two PIO blocks, and one is needed for the PS1 side, so the Maple read
-  and write programs share the other block and are swapped at each read/write
-  handoff. See [`src/host_files/maple_host/README.md`](./src/host_files/maple_host/README.md)
-  for the details.
-- **PS1 pad emulation.** This is PicoGamepadConverter's PlayStation device
-  mode, with two timing fixes for a 240 MHz system clock. The PIO clock
-  divider was changed back to the designed 2.5 MHz. The ACK pulse was delayed
-  to about 6.4 µs, because the PS1's built-in pad driver ignores an ACK that
-  comes too soon. Without that fix, the startup menu and some games ignore the
-  adapter while others work.
-- **Choosing the output.** At boot the firmware reads GPIO24, which carries
-  the Pico's USB VBUS line. No USB power means the Pico is running from the
-  console, so it acts as a PS1 pad. USB power means a PC is attached, so it
-  uses the USB mode saved in the web configuration page. The console side of
-  this is confirmed; the USB side hasn't been tested yet.
+**Dreamcast side.** The Pico polls the controller the same way a Dreamcast
+does: device info request until it answers, then a condition request every
+1 ms. The Maple bus code comes from
+[DreamPicoPort](https://github.com/OrangeFox86/DreamPicoPort). The RP2040 only
+has two PIO blocks and the PS1 side needs one, so the Maple read and write
+programs share the other block and get swapped in and out on every
+transaction. More detail in
+[`src/host_files/maple_host/README.md`](./src/host_files/maple_host/README.md).
+
+**PS1 side.** PicoGamepadConverter's PS1 controller emulation, with two
+changes for the 240 MHz clock: the PIO clock divider is back to the intended
+2.5 MHz, and ACK now comes about 6.4 µs after the last clock edge. The PS1 BIOS
+pad driver ignores an ACK that arrives sooner.
+
+**PS1 or USB.** At boot the firmware checks GPIO24, which is the Pico's USB
+power sense. No USB power means it's running from the console, so it acts as a
+PS1 controller. USB power means it's on a PC, so it uses whatever USB mode is
+saved in the web config.
 
 ---
 
 ## Controls
 
-Dreamcast buttons map to the PlayStation pad as follows.
-
 | Dreamcast | PlayStation |
 |---|---|
 | D-pad | D-pad |
-| A | ✕ Cross |
-| B | ○ Circle |
-| X | □ Square |
-| Y | △ Triangle |
+| A | Cross |
+| B | Circle |
+| X | Square |
+| Y | Triangle |
 | Start | Start |
 | L trigger | L2 |
 | R trigger | R2 |
-| C ¹ | L1 |
-| Z ¹ | R1 |
-| D ¹ | Select |
-| Analog stick | Left stick (analog mode), or D-pad (digital mode) |
+| C | L1 |
+| Z | R1 |
+| D | Select |
+| Analog stick | Left stick in analog mode, D-pad in digital mode |
 
-¹ C, Z and D aren't on a standard Dreamcast controller, but the protocol
-carries them and many arcade sticks wire up six face buttons. Check which of
-your stick's buttons send C, Z and D.
+C, Z and D aren't on the standard Dreamcast controller, but the protocol
+supports them and some controllers use them.
 
-### Digital / analog toggle
+### Digital / analog
 
-Hold **A + B + X + Y + Start** for about a third of a second to switch between
-a **digital** pad (the default) and an **analog** pad. Release everything
-before toggling again.
+Hold **A + B + X + Y + Start** for a moment to switch between digital (the
+default) and analog. Let go of everything before switching again.
 
-- **Digital mode** works everywhere, including the PS1 startup menu. Moving
-  the analog stick more than about 20% from centre presses the D-pad, so a
-  regular Dreamcast controller can play digital-only games.
-- **Analog mode** passes the stick to the game as the left analog stick. Some
-  titles refuse an analog pad on purpose, just as they refuse a DualShock with
-  its analog light on.
+In digital mode, pushing the analog stick past about 20% also presses the
+D-pad, so you can use the stick in games that only take digital input. In
+analog mode the stick goes to the game as the left analog stick. A few games
+refuse analog pads entirely, same as with a DualShock in analog mode.
 
 ### LED
 
 | LED | Meaning |
 |---|---|
-| Slow blink, about 1 per second | Running, but no Dreamcast stick is answering |
-| Groups of blinks with a pause | Stick connected, console reading the adapter. The number of blinks is how many bytes the console read in the last poll: 5 for digital, 9 for analog |
-| Solid | Stick connected, but the console isn't reading the adapter |
+| Slow blink | No Dreamcast controller detected |
+| Groups of blinks | Controller detected and the console is reading the adapter. 5 blinks = digital, 9 = analog |
+| Solid | Controller detected, but the console isn't reading the adapter |
 
 ---
 
@@ -135,14 +113,13 @@ before toggling again.
 ### Parts
 
 - Raspberry Pi Pico (RP2040)
-- A PlayStation controller cable (a cut-off DualShock cable works), for the
-  plug
-- A Dreamcast controller extension cable, for the socket
-- ROHM BA50DD0T 5V LDO regulator (TO220FP-3)
-- Capacitors: 10 µF and 100 µF electrolytic, 2 × 0.1 µF ceramic
-- 2 × 10 Ω resistors (33 Ω as a fallback if the bus is unreliable)
-- A 14 × 20 hole double-sided prototyping board (optional; the layout in the
-  docs is for this size)
+- PlayStation controller cable (one cut off an old DualShock works)
+- Dreamcast controller extension cable, for the socket
+- ROHM BA50DD0T 5V regulator (TO220FP-3)
+- 10 µF and 100 µF electrolytic capacitors, 2 × 0.1 µF ceramic
+- 2 × 10 Ω resistors
+- 14 × 20 hole double-sided protoboard (optional, the layout in `docs/` is for
+  this size)
 
 ### Pin map
 
@@ -154,30 +131,29 @@ before toggling again.
 | 15 | GPIO11 | Dreamcast Data B (SDCKB), through 10 Ω |
 | 25 | GPIO19 | PSX pin 1, DATA |
 | 26 | GPIO20 | PSX pin 2, CMD |
-| 27 | GPIO21 | PSX pin 6, ATT / SEL |
+| 27 | GPIO21 | PSX pin 6, ATT |
 | 29 | GPIO22 | PSX pin 7, CLK |
 | 31 | GPIO26 | PSX pin 9, ACK |
 | 39 | VSYS | Regulator 5V output |
-| 13, 28, 38 | GND | Maple ground, PSX signal ground, power ground |
+| 13, 28, 38 | GND | Maple ground, PSX ground, power ground |
 
 > [!WARNING]
-> **Dreamcast pin 2 (+5V) must never touch a GPIO.** It connects only to the
-> regulator output and VSYS. The RP2040's pins are not 5V tolerant.
+> Dreamcast pin 2 is +5V. Keep it away from every GPIO, it only goes to the
+> regulator output and VSYS. The RP2040 isn't 5V tolerant.
 >
-> **PSX pin 5 (3.3V from the console) is not used.** Trim it short and
-> insulate it properly. A bare wire there can short the console's logic rail.
+> PSX pin 5 is the console's 3.3V line and isn't used. Cut it short and
+> insulate it, or it can short the console.
 >
-> **Cable colours are not standard.** Three different Dreamcast cables used
-> three different colours for +5V. Identify every wire with a meter. Never go
-> by colour.
+> Wire colours aren't standard. Three Dreamcast cables used for this build had
+> three different colours for +5V. Check every wire with a meter.
 
 ### Power
 
-The PlayStation port supplies 3.3V and 7.6V but no 5V, and a Dreamcast stick
-needs 5V. The BA50DD0T regulator drops the console's 7.6V to 5V for the stick
-and for the Pico's VSYS pin. Feeding VSYS rather than the 3V3 pin leaves the
-console's logic rail alone. It also lets you keep USB plugged in while the
-adapter runs in a powered console, which is useful for serial debugging.
+The PS1 controller port has 3.3V and 7.6V but no 5V, and a Dreamcast
+controller needs 5V. The BA50DD0T takes the 7.6V down to 5V for the
+controller and the Pico's VSYS pin. Using VSYS instead of 3V3 means you can
+leave USB plugged in while it runs in a console, which is handy for serial
+debugging.
 
 ![Power section](./docs/power-section.svg)
 
@@ -185,22 +161,16 @@ adapter runs in a powered console, which is useful for serial debugging.
 
 | Before wiring | Finished |
 |---|---|
-| ![The board in its case with both cables in, before wiring](./docs/media/build-pre-wiring.jpg) | ![The finished, wired adapter connected to a PS1](./docs/media/build-finished.jpg) |
+| ![Before wiring](./docs/media/build-pre-wiring.jpg) | ![Finished](./docs/media/build-finished.jpg) |
 
-The Pico sits on the prototyping board inside a small clear case, with the
-PlayStation cable and the Dreamcast extension cable both coming in from the
-top.
+### Build docs
 
-### Full build documentation
-
-- **[`docs/wiring.md`](./docs/wiring.md)**: every connection, how to identify
-  the wires in each cable, the power circuit, grounding, and the checks to do
-  before powering on.
-- **[`docs/assembly.md`](./docs/assembly.md)**: step-by-step soldering order
-  for the prototyping board, with a meter check after each stage.
-- **[`docs/board-layout.py`](./docs/board-layout.py)**: generates the board
-  diagrams below. If a diagram and the script ever disagree, the script is
-  right.
+- [`docs/wiring.md`](./docs/wiring.md): every connection, how to work out
+  which wire is which, the power circuit, and checks to do before powering on.
+- [`docs/assembly.md`](./docs/assembly.md): soldering order for the
+  protoboard.
+- [`docs/board-layout.py`](./docs/board-layout.py): generates the board
+  diagrams below.
 
 | Component side | Solder side (mirrored) |
 |---|---|
@@ -208,14 +178,14 @@ top.
 
 ---
 
-## Getting started
+## Setup
 
-### 1. Build the firmware
+### 1. Build
 
 You need the Raspberry Pi Pico SDK toolchain. The SDK, TinyUSB, Pico-PIO-USB
-and Mongoose are included as git submodules.
+and Mongoose are git submodules.
 
-**Linux / macOS**
+Linux / macOS:
 
 ```bash
 git clone --recurse-submodules https://github.com/NenfizCode/Pico-DC-PS1
@@ -229,70 +199,58 @@ cd Pico-DC-PS1 && mkdir build && cd build
 cmake ../src -DPICO_BOARD=pico && make
 ```
 
-**Windows**
-
-Install the VS Code *Raspberry Pi Pico* extension and the Visual Studio *Desktop
-development with C++* workload, then run this from the repository folder:
+Windows: install the VS Code Raspberry Pi Pico extension and the Visual Studio
+"Desktop development with C++" workload, then run this in the repo folder:
 
 ```powershell
 .\build.ps1
 ```
 
-Either way, the output is `build/PicoGamepadConverter.uf2`.
+The firmware ends up at `build/PicoGamepadConverter.uf2`.
 
-### 2. Flash it
+### 2. Flash
 
-Hold **BOOTSEL** while plugging the Pico into a computer, then copy
-`PicoGamepadConverter.uf2` onto the `RPI-RP2` drive that appears.
+Hold BOOTSEL while plugging the Pico into your computer, then copy the `.uf2`
+onto the `RPI-RP2` drive.
 
-### 3. Set Dreamcast as the input (once)
+### 3. Set the input to Dreamcast
 
-The input mode is stored in the Pico's flash, so this only needs doing once.
+Only needed once, it's saved to flash.
 
-1. Plug the Pico into a computer by USB.
-2. Within 3 seconds of powering on, press the **BOOTSEL** button. The LED
-   starts blinking and the Pico appears as a USB network adapter.
-3. Open <http://192.168.3.1> in a browser.
-4. Set **Host** to **Dreamcast**. Set **Device** to the USB mode you want on a
-   PC (Xinput is a good default). Click **Save**.
+1. Plug the Pico into your computer.
+2. Press BOOTSEL within 3 seconds of it powering on. The LED starts blinking
+   and the Pico shows up as a network adapter.
+3. Go to <http://192.168.3.1>.
+4. Set Host to Dreamcast and Device to the USB mode you want on PC (Xinput
+   is fine). Save.
 
-You don't need to pick PS1/PS2 as the Device. The adapter switches to PS1/PS2
-on its own whenever it's powered by the console. Switching to the USB mode when
-plugged into a PC is implemented but not yet tested.
+You don't have to set Device to PS1/PS2. It goes into PS1 mode by itself when
+the console powers it.
 
 ### 4. Play
 
-With the console **off**, plug the Dreamcast stick into the adapter and the
-adapter into controller port 1. Turn the console on. The LED should go from a
-slow blink to groups of blinks once the stick is detected and the console is
-polling.
-
-Always connect and disconnect with the console off.
+With the console off, plug the controller into the adapter and the adapter
+into port 1, then turn the console on. Don't plug or unplug anything with the
+console on.
 
 ---
 
 ## Troubleshooting
 
-- **Slow blink never stops.** The stick isn't answering. Check Data A and
-  Data B. If they're swapped, the stick is never detected, and swapping them
-  back costs nothing because both lines are 3.3V behind 10 Ω. Then check the
-  stick's 5V supply.
-- **LED solid; the console doesn't respond.** The stick is fine but the
-  console isn't reading the adapter. Check the DATA, CMD, ATT, CLK and ACK
-  wires and the PSX ground.
-- **Some games or the startup menu ignore the adapter, but others work.**
-  Make sure you're running this repository's firmware. The ACK timing fix in
-  `psxSPI.pio` is what makes the console's own pad driver accept the adapter.
-- **A game ignores the stick in analog mode.** Toggle back to digital with
-  A + B + X + Y + Start. Some games only accept a digital pad.
-- **Unreliable stick input.** Try 33 Ω instead of 10 Ω on the data lines. The
-  RP2040's internal pull-ups have been enough so far. If they aren't, add
-  1 kΩ from each data line to 3V3 (Pico pin 36).
+- **LED keeps slow blinking.** The controller isn't responding. Data A and B
+  are probably swapped (easy to do, and harmless), or the controller isn't
+  getting 5V.
+- **LED solid, console doesn't respond.** Check the DATA, CMD, ATT, CLK, ACK
+  and ground wires on the PS1 side.
+- **Game ignores the controller in analog mode.** Switch to digital. Some
+  games only take digital pads.
+- **Input drops out.** Try 33 Ω resistors instead of 10 Ω. If that doesn't
+  fix it, add 1 kΩ pull-ups from each data line to 3V3 (Pico pin 36). Neither
+  has been needed so far.
 
-Avoid having USB plugged in while the adapter is in a console that's switched
-**off**. That puts USB voltage on the regulator's output while its input is at
-0V. Either unplug from the console when using a PC, or add a 1N5819 Schottky
-diode from the regulator's output to its input.
+Don't leave USB plugged in while the adapter is in a console that's switched
+off. That backfeeds the regulator. Either unplug it from the console first or
+add a 1N5819 diode from the regulator's output to its input.
 
 ---
 
@@ -300,43 +258,46 @@ diode from the regulator's output to its input.
 
 | Path | What |
 |---|---|
-| `src/host_files/maple_host/` | Dreamcast Maple bus host (added by this project) |
-| `src/device_files/psx-device/` | PS1/PS2 pad emulation (from PicoGamepadConverter, with the timing fixes) |
-| `src/main.c` | Startup, choosing the output by VBUS, the button combo and the LED |
-| `src/convert_data.c` | Dreamcast → PlayStation / USB button mapping |
-| `src/config.h` | Pin assignments (the PS1 pins are set in `psxSPI.pio`) |
-| `docs/` | Wiring, assembly, board layout and diagrams |
+| `src/host_files/maple_host/` | Dreamcast Maple bus code |
+| `src/device_files/psx-device/` | PS1/PS2 controller emulation |
+| `src/main.c` | Startup, PS1/USB selection, button combo, LED |
+| `src/convert_data.c` | Button mapping |
+| `src/config.h` | Pin assignments (PS1 pins are in `psxSPI.pio`) |
+| `docs/` | Wiring, assembly and board diagrams |
 | `build.ps1` | Windows build script |
 
-PicoGamepadConverter's other input and output modes (USB, Bluetooth, PS/2
-keyboard, N64, GameCube, Wii, Switch) are still in the source and selectable
-from the web page, but this project neither tests nor documents them. See the
-[original project](https://github.com/Loc15/PicoGamepadConverter) for those.
+The other PicoGamepadConverter modes (USB, Bluetooth, PS/2 keyboard, N64,
+GameCube, Wii, Switch) are still in the code but haven't been tested. See
+the [original project](https://github.com/Loc15/PicoGamepadConverter) for
+those.
 
 ---
 
-## Acknowledgments
+## Credits
 
-- **[PicoGamepadConverter](https://github.com/Loc15/PicoGamepadConverter)** by
-  Loc15. The base this project is built on: PS1/PS2 device emulation, USB
-  modes, web configuration and the overall firmware structure.
-- **[DreamPicoPort](https://github.com/OrangeFox86/DreamPicoPort)** by
-  OrangeFox86, for the Maple bus implementation, by way of the trimmed
-  host-only copy in [OGX-Mini-2026](https://github.com/MegaCadeDev/OGX-Mini-2026).
-- [PicoMemcard](https://github.com/dangiu/PicoMemcard) by dangiu, for the
-  `psxSPI.pio` program.
-- [psx-spx](https://psx-spx.consoledev.net/) for the PlayStation controller
-  timing details behind the ACK fix.
-- PicoGamepadConverter's own dependencies and credits:
+- [PicoGamepadConverter](https://github.com/Loc15/PicoGamepadConverter) by
+  Loc15, the project this is built on.
+- [DreamPicoPort](https://github.com/OrangeFox86/DreamPicoPort) by OrangeFox86
+  for the Maple bus code, via
+  [OGX-Mini-2026](https://github.com/MegaCadeDev/OGX-Mini-2026).
+- [PicoMemcard](https://github.com/dangiu/PicoMemcard) by dangiu for
+  `psxSPI.pio`.
+- [psx-spx](https://psx-spx.consoledev.net/) for PS1 controller timing.
+- Everything PicoGamepadConverter credits:
   [TinyUSB](https://github.com/hathach/tinyusb),
   [Pico-PIO-USB](https://github.com/sekigon-gonnoc/Pico-PIO-USB),
   [btstack](https://github.com/bluekitchen/btstack),
   [GP2040-CE](https://github.com/OpenStickCommunity/GP2040-CE),
-  [DS4toPS2](https://github.com/TonyMacDonald1995/DS4toPS2) and others listed
-  in the [original README](https://github.com/Loc15/PicoGamepadConverter#acknowledgments).
+  [DS4toPS2](https://github.com/TonyMacDonald1995/DS4toPS2) and
+  [the rest](https://github.com/Loc15/PicoGamepadConverter#acknowledgments).
 
 ## License
 
-[GNU General Public License v3](LICENSE), the same as PicoGamepadConverter. The
-Maple bus files taken from DreamPicoPort are MIT licensed, which is compatible
-with GPLv3.
+GPL-3.0, see [LICENSE](LICENSE). This is inherited from PicoGamepadConverter
+(and PicoMemcard, which `psxSPI.pio` comes from), so the project as a whole
+and any firmware built from it are GPL-3.0.
+
+The Maple bus files in `src/host_files/maple_host/` come from DreamPicoPort
+and are under the MIT license. Its copyright notice is kept in
+[`src/host_files/maple_host/LICENSE`](./src/host_files/maple_host/LICENSE),
+as MIT requires.
