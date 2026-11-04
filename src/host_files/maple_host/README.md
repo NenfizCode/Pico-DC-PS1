@@ -119,7 +119,7 @@ buffer — which is why `MapleBus` is constructed with `dirPin = -1`.
 
 **Working end to end as of 2026-09-11.** A Dreamcast arcade stick, read over
 the single-block PIO swap, played a game on a fat PS1 with Device set to
-PS1/PS2, USB-powered. Earlier the same evening it played Melee on PC with
+PS1/PS2, USB-powered. Earlier the same evening it was tested on PC with
 Device set to Xinput. The RP2040's internal pull-ups were sufficient on the
 Maple lines; no external pull-ups were fitted.
 

@@ -46,7 +46,7 @@ menu and in games that use the standard pad driver.
 | Where | What | Result |
 |---|---|---|
 | PS1 (original "fat" model), console-powered | BIOS / startup menu and every game tried, including Soul Edge and King of Fighters '96 | Working, no known issues |
-| PC (Xinput) | Super Smash Bros. Melee | Worked before the automatic output switch was added; not retested since |
+| PC (Xinput) | Tested on PC | Worked before the automatic output switch was added; not retested since |
 | Automatic PS1 / USB switch | | Not yet tested |
 | Input | Dreamcast arcade stick | Working |
 

@@ -364,7 +364,7 @@ that the regulator's return current is not sharing a path with the bus signals.
 
 - **Whether external pull-ups are needed on the Maple data lines.** *Resolved
   2026-09-11: they are not. The stick came up on the internal pull-ups alone
-  and played Melee without a hiccup. The 1kΩ stay in the drawer.*
+  and worked on PC without a hiccup. The 1kΩ stay in the drawer.*
 
   Original note: The protocol
   block diagram in DreamPicoPort shows the host providing pull-ups to +3.3V, but
