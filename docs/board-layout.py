@@ -31,7 +31,7 @@ LANDINGS = {
 }
 # used Pico pins -> ramp
 PICO_USED = {
-    "C13": "teal", "C14": "teal", "C15": "teal",
+    "C14": "teal", "C15": "teal",
     "J2": "red", "J3": "teal", "J4": "gray", "J5": "gray",
     "J10": "purple", "J12": "purple", "J13": "purple",
     "J14": "purple", "J15": "purple", "J16": "purple",
@@ -254,7 +254,7 @@ def build(view, theme):
     # legend
     ly = Y0 + (NROWS - 1) * P + 40
     if view == "top":
-        items = [("teal", "Dreamcast"), ("purple", "PlayStation"), ("coral", "power parts"), ("gray", "serial, reserved"), ("red", "pin 39, 5V")]
+        items = [("teal", "Dreamcast"), ("purple", "PlayStation"), ("coral", "power parts"), ("gray", "not connected"), ("red", "pin 39, 5V")]
     else:
         items = [("bus", "buses, bare wire"), ("rail", "ground, bare wire"), ("link", "short links, bare"), ("ins", "insulated wire")]
     lx = 40

@@ -23,15 +23,14 @@ the PS1 pad bus is 3.3V), so no level shifting is needed.
 |---|---|---|---|
 | 14 | GPIO10 | Dreamcast Data A (SDCKA) | 10 Ω |
 | 15 | GPIO11 | Dreamcast Data B (SDCKB) | 10 Ω |
-| 13 | GND | Dreamcast ground | |
 | 25 | GPIO19 | PSX pin 1, DATA | direct |
 | 26 | GPIO20 | PSX pin 2, CMD | direct |
 | 27 | GPIO21 | PSX pin 6, ATT | direct |
 | 29 | GPIO22 | PSX pin 7, CLK | direct |
 | 31 | GPIO26 | PSX pin 9, ACK | direct |
 | 28 | GND | PSX ground | |
+| 38 | GND | Common ground | |
 | 39 | VSYS | Regulator 5V output | |
-| 38 | GND | Power ground | |
 
 The PS1 pins (GPIO 19, 20, 21, 22, 26) are fixed in
 `src/device_files/psx-device/psxSPI.pio`. The Maple pins are set by
@@ -86,6 +85,11 @@ To work out which socket wire is which:
 3. Unplug it and connect the male half to the female half. Use continuity mode
    to find which female wire matches each male wire.
 4. Write the mapping down before you unplug them.
+
+Without a Dreamcast, you can probe the socket's contacts directly: use
+continuity mode from each contact to the cut wires and match them to the
+pinout above. The socket is the mirror image of the plug, so double-check
+which side pin 1 is on.
 
 Pins 3 and 4 are joined inside the Dreamcast, so both read as ground. Connect
 both to ground, along with the cable shield if it has one.
@@ -185,15 +189,18 @@ fuses do. A PS1's fuses (PS601/PS606) have to be desoldered to replace.
 
 ## Grounding
 
-Join all grounds: PSX pin 4, the Dreamcast ground wires and shield, regulator
-pin 2, and the capacitor negative legs. Use Pico pin 38 for the power ground
-and pins 13 and 28 for the signal grounds, so the regulator's return current
-doesn't share a path with the data lines.
+All grounds are joined: PSX pin 4, the Dreamcast ground, sense and shield
+wires, regulator pin 2, the capacitor negative legs, and the Pico. All of the
+Pico's GND pins are connected together on the board, so any of them works.
+
+On the protoboard layout, everything except the PSX ground wire goes to one
+ground bus tied to Pico pin 38. The PSX ground wire goes to pin 28.
 
 ## Before powering on
 
-1. Build and test the power section first, with the Pico disconnected. Plug
-   into the console, power on, and check the regulator output reads 5.0V.
+1. Build and test the power section first, with the regulator output not
+   yet connected to VSYS. Plug into the console, power on, and check the
+   regulator output reads 5.0V.
 2. Check continuity from every soldered GPIO to the +5V line and to the 7.6V
    line. Both must be open.
 3. Check that PSX pin 5 (3.3V) is cut and insulated.

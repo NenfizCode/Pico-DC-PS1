@@ -377,7 +377,6 @@ text { font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif; 
 <g class="gray"><circle cx="260" cy="70" r="5"/></g>
 <g class="gray"><circle cx="260" cy="230" r="5"/></g>
 <g class="gray"><circle cx="200" cy="230" r="5"/></g>
-<g class="teal"><circle cx="420" cy="310" r="5.5"/></g>
 <g class="teal"><circle cx="420" cy="330" r="5.5"/></g>
 <g class="teal"><circle cx="420" cy="350" r="5.5"/></g>
 <g class="red"><circle cx="280" cy="90" r="5.5"/></g>

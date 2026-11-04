@@ -75,7 +75,8 @@ the most crowded area.
 
 ## Parts
 
-- Raspberry Pi Pico with header pins at 1–4, 13–15, 25–31 and 36–39
+- Raspberry Pi Pico with header pins at 1–4, 13–15, 25–31 and 36–39. Only
+  14, 15, 25–29, 31, 38 and 39 are connected; the rest hold the Pico in place
 - 2 × 10 Ω resistors
 - 1 × 10 µF electrolytic capacitor
 - 1 × 100 µF electrolytic capacitor (a 6.3 mm 47 µF fits inside the board
@@ -187,6 +188,10 @@ end is bent along the underside to the pad listed.
 
 ### 6. Power-up
 
+Flash the firmware and set the input to Dreamcast first (see Setup in the
+[README](../README.md#setup)). With the console unplugged, this can be done
+over USB at any point.
+
 20. With USB unplugged and the VSYS link not fitted, plug into the console and
     power on. Measure against ground:
     - L6 (input): about 7.6V
@@ -195,9 +200,10 @@ end is bent along the underside to the pad listed.
     Power off and unplug.
 21. Fit the **insulated VSYS link** from J2 (pin 39) along row 2 to N3.
     Check that pin 39 has continuity to N6 and is open to pin 38.
-22. Plug into the console and power on. The LED should slow-blink, then
-    change to groups of blinks once a Dreamcast controller is connected.
-    Check the BIOS screen, then a game.
+22. Plug a Dreamcast controller into the adapter, plug the adapter into the
+    console, and power on. The LED should show groups of blinks once the
+    console starts reading the adapter (slow blinking means the controller
+    isn't detected). Check that the BIOS menu responds, then try a game.
 23. Plug in USB as well, with the console on, and check that nothing gets
     warm.
 

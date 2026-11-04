@@ -96,8 +96,9 @@ supports them and some controllers use them.
 
 ### Digital / analog
 
-Hold **A + B + X + Y + Start** for a moment to switch between digital (the
-default) and analog. Let go of everything before switching again.
+Hold **A + B + X + Y + Start** for a moment to switch between digital and
+analog. Let go of everything before switching again. It always starts in
+digital mode at power-up.
 
 In digital mode, pushing the analog stick past about 20% also presses the
 D-pad, so you can use the stick in games that only take digital input. In
@@ -118,7 +119,9 @@ refuse analog pads entirely, same as with a DualShock in analog mode.
 
 ### Parts
 
-- Raspberry Pi Pico (RP2040)
+- Raspberry Pi Pico (RP2040). Not a Pico W: the PS1/USB detection uses
+  GPIO24, which the Pico W uses for its wireless chip. Pico 2 hasn't been
+  tested.
 - PlayStation controller cable (one cut off an old DualShock works)
 - Dreamcast controller extension cable, for the socket
 - ROHM BA50DD0T 5V regulator (TO220FP-3)
@@ -141,7 +144,7 @@ refuse analog pads entirely, same as with a DualShock in analog mode.
 | 29 | GPIO22 | PSX pin 7, CLK |
 | 31 | GPIO26 | PSX pin 9, ACK |
 | 39 | VSYS | Regulator 5V output |
-| 13, 28, 38 | GND | Maple ground, PSX ground, power ground |
+| 28, 38 | GND | PSX ground, common ground (any Pico GND pin works) |
 
 > [!WARNING]
 > Dreamcast pin 2 is +5V. Keep it away from every GPIO, it only goes to the
@@ -155,11 +158,9 @@ refuse analog pads entirely, same as with a DualShock in analog mode.
 
 ### Power
 
-The PS1 controller port has 3.3V and 7.6V but no 5V, and a Dreamcast
-controller needs 5V. The BA50DD0T takes the 7.6V down to 5V for the
-controller and the Pico's VSYS pin. Using VSYS instead of 3V3 means you can
-leave USB plugged in while it runs in a console, which is handy for serial
-debugging.
+The PS1 controller port has no 5V line, so the BA50DD0T makes 5V from the
+console's 7.6V for the controller and the Pico's VSYS pin. Details in
+[`docs/wiring.md`](./docs/wiring.md#power).
 
 ![Power section](./docs/power-section-dark.svg)
 
@@ -216,19 +217,25 @@ The firmware ends up at `build/PicoGamepadConverter.uf2`.
 
 ### 2. Flash
 
+Do this and the next step with the adapter unplugged from the console.
+
 Hold BOOTSEL while plugging the Pico into your computer, then copy the `.uf2`
-onto the `RPI-RP2` drive.
+onto the `RPI-RP2` drive. The Pico reboots when the copy finishes.
 
 ### 3. Set the input to Dreamcast
 
 Only needed once, it's saved to flash.
 
 1. Plug the Pico into your computer.
-2. Press BOOTSEL within 3 seconds of it powering on. The LED starts blinking
-   and the Pico shows up as a network adapter.
+2. Straight after plugging it in, press and hold BOOTSEL. Keep holding until
+   the LED starts blinking (about 3 seconds), then let go. The Pico now shows
+   up as a USB network adapter.
 3. Go to <http://192.168.3.1>.
 4. Set Host to Dreamcast and Device to the USB mode you want on PC (Xinput
-   is fine). Save.
+   is fine). Save, then unplug.
+
+The config page uses USB networking (RNDIS). Windows and Linux support it out
+of the box; macOS needs a third-party driver.
 
 You don't have to set Device to PS1/PS2. It goes into PS1 mode by itself when
 the console powers it.

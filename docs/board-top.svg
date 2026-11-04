@@ -361,7 +361,6 @@ text { font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif; 
 <g class="teal"><circle cx="460" cy="390" r="5.5"/></g>
 <g class="teal"><circle cx="460" cy="410" r="5.5"/></g>
 <g class="teal"><circle cx="460" cy="430" r="5.5"/></g>
-<g class="teal"><circle cx="240" cy="310" r="5.5"/></g>
 <g class="teal"><circle cx="240" cy="330" r="5.5"/></g>
 <g class="teal"><circle cx="240" cy="350" r="5.5"/></g>
 <g class="red"><circle cx="380" cy="90" r="5.5"/></g>
@@ -413,7 +412,7 @@ text { font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif; 
 <g class="coral"><rect x="260" y="481" width="12" height="12" rx="2"/></g>
 <text class="tt t" x="278" y="491">power parts</text>
 <g class="gray"><rect x="377" y="481" width="12" height="12" rx="2"/></g>
-<text class="tt t" x="395" y="491">serial, reserved</text>
-<g class="red"><rect x="529" y="481" width="12" height="12" rx="2"/></g>
-<text class="tt t" x="547" y="491">pin 39, 5V</text>
+<text class="tt t" x="395" y="491">not connected</text>
+<g class="red"><rect x="508" y="481" width="12" height="12" rx="2"/></g>
+<text class="tt t" x="526" y="491">pin 39, 5V</text>
 </svg>
