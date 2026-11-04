@@ -130,10 +130,3 @@ void gc_device_main(uint pio, GCReport *data, int data_pin){
     }
 }
 
-/*
-RED -> DATA
-BLACK -> GND
-BLUE -> GND
-WHITE -> 5
-GREEN -> 3.3
-*/

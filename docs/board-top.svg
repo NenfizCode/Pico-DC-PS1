@@ -375,37 +375,37 @@ text { font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif; 
 <g class="purple"><circle cx="380" cy="350" r="5.5"/></g>
 <g class="purple"><circle cx="380" cy="370" r="5.5"/></g>
 <line class="leader" x1="193" y1="250" x2="164" y2="250"/>
-<text class="tt t" x="160" y="254" text-anchor="end">A10 · DC orange → 10Ω → pin 14</text>
+<text class="tt t" x="160" y="254" text-anchor="end">A10 · DC data A → pin 14</text>
 <line class="leader" x1="193" y1="430" x2="164" y2="430"/>
-<text class="tt t" x="160" y="434" text-anchor="end">A19 · DC red → 10Ω → pin 15</text>
+<text class="tt t" x="160" y="434" text-anchor="end">A19 · DC data B → pin 15</text>
 <line class="leader" x1="427" y1="70" x2="486" y2="70"/>
 <text class="tt t" x="490" y="74">L1, N1 · electrolytic − legs</text>
 <line class="leader" x1="427" y1="110" x2="486" y2="110"/>
 <text class="tt t" x="490" y="114">L3, N3 · electrolytic + legs</text>
 <line class="leader" x1="427" y1="130" x2="486" y2="130"/>
-<text class="tt t" x="490" y="134">L4 · PSX purple 7.6V → IN</text>
+<text class="tt t" x="490" y="134">L4 · PSX 7.6V → IN</text>
 <line class="leader" x1="447" y1="130" x2="486" y2="146"/>
-<text class="tt t" x="490" y="150">M4 · DC green +5V → OUT</text>
+<text class="tt t" x="490" y="150">M4 · DC +5V → OUT</text>
 <line class="leader" x1="427" y1="170" x2="486" y2="170"/>
 <text class="tt t" x="490" y="174">L M N 6 · regulator legs 1 2 3</text>
 <line class="leader" x1="467" y1="190" x2="486" y2="190"/>
 <text class="tt t" x="490" y="194">L7/8, N7/8 · 0.1µF · face → row 20</text>
 <line class="leader" x1="427" y1="250" x2="486" y2="250"/>
-<text class="tt t" x="490" y="254">L10 · PSX green (ACK) → pin 31</text>
+<text class="tt t" x="490" y="254">L10 · PSX ACK → pin 31</text>
 <line class="leader" x1="427" y1="270" x2="486" y2="270"/>
 <text class="tt t" x="490" y="274">L11 · empty</text>
 <line class="leader" x1="427" y1="290" x2="486" y2="290"/>
-<text class="tt t" x="490" y="294">L12 · PSX blue (CLK) → pin 29</text>
+<text class="tt t" x="490" y="294">L12 · PSX CLK → pin 29</text>
 <line class="leader" x1="427" y1="310" x2="486" y2="310"/>
-<text class="tt t" x="490" y="314">L13 · PSX black (GND) → pin 28</text>
+<text class="tt t" x="490" y="314">L13 · PSX GND → pin 28</text>
 <line class="leader" x1="427" y1="330" x2="486" y2="330"/>
-<text class="tt t" x="490" y="334">L14 · PSX yellow (ATT) → pin 27</text>
+<text class="tt t" x="490" y="334">L14 · PSX ATT → pin 27</text>
 <line class="leader" x1="427" y1="350" x2="486" y2="350"/>
-<text class="tt t" x="490" y="354">L15 · PSX orange (CMD) → pin 26</text>
+<text class="tt t" x="490" y="354">L15 · PSX CMD → pin 26</text>
 <line class="leader" x1="427" y1="370" x2="486" y2="370"/>
-<text class="tt t" x="490" y="374">L16 · PSX brown (DATA) → pin 25</text>
+<text class="tt t" x="490" y="374">L16 · PSX DATA → pin 25</text>
 <line class="leader" x1="467" y1="410" x2="486" y2="410"/>
-<text class="tt t" x="490" y="414">N17–19 · DC white, blue, grey</text>
+<text class="tt t" x="490" y="414">N17–19 · DC ground, sense, shield</text>
 <g class="teal"><rect x="40" y="481" width="12" height="12" rx="2"/></g>
 <text class="tt t" x="58" y="491">Dreamcast</text>
 <g class="purple"><rect x="143" y="481" width="12" height="12" rx="2"/></g>

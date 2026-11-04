@@ -28,11 +28,11 @@ text { font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif; 
 <g class="coral"><rect x="267" y="160" width="46" height="28" rx="4"/><text class="th" x="290" y="178" text-anchor="middle">1 IN</text></g>
 <g class="coral"><rect x="317" y="160" width="46" height="28" rx="4"/><text class="th" x="340" y="178" text-anchor="middle">2 GND</text></g>
 <g class="red"><rect x="367" y="160" width="46" height="28" rx="4"/><text class="th" x="390" y="178" text-anchor="middle">3 OUT</text></g>
-<g class="purple"><rect x="80" y="158" width="170" height="32" rx="4"/><text class="th" x="88" y="172">PSX purple</text><text class="ts" x="88" y="185">7.6V from the console</text></g>
+<g class="purple"><rect x="80" y="158" width="170" height="32" rx="4"/><text class="th" x="88" y="172">PSX pin 3</text><text class="ts" x="88" y="185">7.6V from the console</text></g>
 <g class="red"><rect x="470" y="84" width="170" height="32" rx="4"/><text class="th" x="478" y="98">Pico pin 39 · VSYS</text><text class="ts" x="478" y="111">the only 5V pin</text></g>
-<g class="teal"><rect x="470" y="158" width="170" height="32" rx="4"/><text class="th" x="478" y="172">DC green</text><text class="ts" x="478" y="185">+5V to the stick</text></g>
+<g class="teal"><rect x="470" y="158" width="170" height="32" rx="4"/><text class="th" x="478" y="172">DC +5V</text><text class="ts" x="478" y="185">+5V to the controller</text></g>
 <g class="coral"><rect x="80" y="206" width="190" height="64" rx="4"/><text class="th" x="88" y="221">Input capacitors</text><text class="ts" x="88" y="234">10µF electrolytic</text><text class="ts" x="88" y="247">+ leg up · stripe down</text><text class="ts" x="88" y="260">0.1µF ceramic, either way</text></g>
 <g class="coral"><rect x="420" y="206" width="190" height="64" rx="4"/><text class="th" x="428" y="221">Output capacitors</text><text class="ts" x="428" y="234">100µF electrolytic</text><text class="ts" x="428" y="247">+ leg up · stripe down</text><text class="ts" x="428" y="260">0.1µF ceramic, either way</text></g>
-<g class="purple"><rect x="80" y="318" width="190" height="32" rx="4"/><text class="th" x="88" y="332">PSX black</text><text class="ts" x="88" y="345">ground from the console</text></g>
+<g class="purple"><rect x="80" y="318" width="190" height="32" rx="4"/><text class="th" x="88" y="332">PSX pin 4</text><text class="ts" x="88" y="345">ground from the console</text></g>
 <g class="gray"><rect x="420" y="318" width="190" height="32" rx="4"/><text class="th" x="428" y="332">Pico pin 38 · GND</text><text class="ts" x="428" y="345">power ground</text></g>
 </svg>

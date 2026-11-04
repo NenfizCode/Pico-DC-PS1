@@ -123,7 +123,7 @@ refuse analog pads entirely, same as with a DualShock in analog mode.
 
 ### Pin map
 
-![Pico pin map](./docs/pico-pin-map.svg)
+![Pico pin map](./docs/pico-pin-map-dark.svg)
 
 | Pico pin | GPIO | Connects to |
 |---|---|---|
@@ -144,8 +144,8 @@ refuse analog pads entirely, same as with a DualShock in analog mode.
 > PSX pin 5 is the console's 3.3V line and isn't used. Cut it short and
 > insulate it, or it can short the console.
 >
-> Wire colours aren't standard. Three Dreamcast cables used for this build had
-> three different colours for +5V. Check every wire with a meter.
+> Identify every wire with a multimeter before soldering. Cables differ, so
+> don't rely on anyone else's wiring notes for which wire is which.
 
 ### Power
 
@@ -155,7 +155,7 @@ controller and the Pico's VSYS pin. Using VSYS instead of 3V3 means you can
 leave USB plugged in while it runs in a console, which is handy for serial
 debugging.
 
-![Power section](./docs/power-section.svg)
+![Power section](./docs/power-section-dark.svg)
 
 ### Build photos
 
@@ -174,7 +174,7 @@ debugging.
 
 | Component side | Solder side (mirrored) |
 |---|---|
-| ![Board top](./docs/board-top.svg) | ![Board bottom](./docs/board-bottom.svg) |
+| ![Board top](./docs/board-top-dark.svg) | ![Board bottom](./docs/board-bottom-dark.svg) |
 
 ---
 

@@ -44,12 +44,12 @@ LINKS = [
     (["K9", "N9"], "rail"),           # ground bus, under the power section
     (["N9", "N20"], "rail"),          # ground spur down the edge
     (["J3", "K3"], "link"),           # pin 38 -> ground
-    (["L3", "L6"], "bus"),            # IN link: 10uF+, purple landing, leg 1
-    (["N3", "N6"], "bus"),            # OUT link: 100uF+, DC green, VSYS, leg 3
+    (["L3", "L6"], "bus"),            # IN link: 10uF+, 7.6V landing, leg 1
+    (["N3", "N6"], "bus"),            # OUT link: 100uF+, DC +5V, VSYS, leg 3
     (["L7", "L6"], "link"), (["L8", "L9"], "link"),
     (["N7", "N6"], "link"), (["N8", "N9"], "link"),
     (["M6", "M9"], "link"),           # leg 2 -> ground
-    (["M4", "N4"], "link"),           # DC green -> OUT
+    (["M4", "N4"], "link"),           # DC +5V -> OUT
     (["J2", "N2", "N3"], "ins"),      # VSYS, insulated
     (["L10", "J10"], "link"), (["L12", "J12"], "link"), (["L13", "J13"], "link"),
     (["L14", "J14"], "link"), (["L15", "J15"], "link"), (["L16", "J16"], "link"),
@@ -57,22 +57,22 @@ LINKS = [
 ]
 
 TOP_LABELS = [
-    ("A10", "A10 · DC orange → 10Ω → pin 14", "L"),
-    ("A19", "A19 · DC red → 10Ω → pin 15", "L"),
+    ("A10", "A10 · DC data A → pin 14", "L"),
+    ("A19", "A19 · DC data B → pin 15", "L"),
     ("L1", "L1, N1 · electrolytic − legs", "R"),
     ("L3", "L3, N3 · electrolytic + legs", "R"),
-    ("L4", "L4 · PSX purple 7.6V → IN", "R"),
-    ("M4", "M4 · DC green +5V → OUT", "R"),
+    ("L4", "L4 · PSX 7.6V → IN", "R"),
+    ("M4", "M4 · DC +5V → OUT", "R"),
     ("L6", "L M N 6 · regulator legs 1 2 3", "R"),
     ("N7", "L7/8, N7/8 · 0.1µF · face → row 20", "R"),
-    ("L10", "L10 · PSX green (ACK) → pin 31", "R"),
+    ("L10", "L10 · PSX ACK → pin 31", "R"),
     ("L11", "L11 · empty", "R"),
-    ("L12", "L12 · PSX blue (CLK) → pin 29", "R"),
-    ("L13", "L13 · PSX black (GND) → pin 28", "R"),
-    ("L14", "L14 · PSX yellow (ATT) → pin 27", "R"),
-    ("L15", "L15 · PSX orange (CMD) → pin 26", "R"),
-    ("L16", "L16 · PSX brown (DATA) → pin 25", "R"),
-    ("N18", "N17–19 · DC white, blue, grey", "R"),
+    ("L12", "L12 · PSX CLK → pin 29", "R"),
+    ("L13", "L13 · PSX GND → pin 28", "R"),
+    ("L14", "L14 · PSX ATT → pin 27", "R"),
+    ("L15", "L15 · PSX CMD → pin 26", "R"),
+    ("L16", "L16 · PSX DATA → pin 25", "R"),
+    ("N18", "N17–19 · DC ground, sense, shield", "R"),
 ]
 BOT_LABELS = [
     ("A10", "A10→A11, A18→A19 · DC wire ends", "L"),
