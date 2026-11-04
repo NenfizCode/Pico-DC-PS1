@@ -25,14 +25,14 @@ COMPONENTS = [
 # external wire landings on the top side: hole -> ramp
 LANDINGS = {
     "A10": "teal", "A19": "teal",
-    "L4": "purple", "M4": "teal",
-    "L10": "purple", "L12": "purple", "L13": "purple", "L14": "purple", "L15": "purple", "L16": "purple",
+    "L4": "purple", "N2": "teal",
+    "K10": "purple", "K12": "purple", "K13": "purple", "K14": "purple", "K15": "purple", "K16": "purple",
     "N17": "teal", "N18": "teal", "N19": "teal",
 }
 # used Pico pins -> ramp
 PICO_USED = {
     "C14": "teal", "C15": "teal",
-    "J2": "red", "J3": "teal", "J4": "gray", "J5": "gray",
+    "J2": "red", "J3": "gray",
     "J10": "purple", "J12": "purple", "J13": "purple",
     "J14": "purple", "J15": "purple", "J16": "purple",
 }
@@ -49,43 +49,42 @@ LINKS = [
     (["L7", "L6"], "link"), (["L8", "L9"], "link"),
     (["N7", "N6"], "link"), (["N8", "N9"], "link"),
     (["M6", "M9"], "link"),           # leg 2 -> ground
-    (["M4", "N4"], "link"),           # DC +5V -> OUT
-    (["J2", "N2", "N3"], "ins"),      # VSYS, insulated
-    (["L10", "J10"], "link"), (["L12", "J12"], "link"), (["L13", "J13"], "link"),
-    (["L14", "J14"], "link"), (["L15", "J15"], "link"), (["L16", "J16"], "link"),
+    (["N2", "N3"], "link"),           # DC +5V -> OUT
+    (["J2", "M2", "N3"], "ins"),      # VSYS, insulated
+    (["K10", "J10"], "link"), (["K12", "J12"], "link"), (["K13", "J13"], "link"),
+    (["K14", "J14"], "link"), (["K15", "J15"], "link"), (["K16", "J16"], "link"),
     (["A10", "A11"], "link"), (["A14", "C14"], "link"), (["A15", "C15"], "link"), (["A18", "A19"], "link"),
 ]
 
 TOP_LABELS = [
-    ("A10", "A10 · DC data A → pin 14", "L"),
-    ("A19", "A19 · DC data B → pin 15", "L"),
+    ("A10", "A10 · DC pin 1 (data A)", "L"),
+    ("A19", "A19 · DC pin 5 (data B)", "L"),
     ("L1", "L1, N1 · electrolytic − legs", "R"),
     ("L3", "L3, N3 · electrolytic + legs", "R"),
-    ("L4", "L4 · PSX 7.6V → IN", "R"),
-    ("M4", "M4 · DC +5V → OUT", "R"),
+    ("L4", "L4 · PSX pin 3, 7.6V → IN", "R"),
+    ("N2", "N2 · DC pin 2, +5V → OUT", "R"),
     ("L6", "L M N 6 · regulator legs 1 2 3", "R"),
     ("N7", "L7/8, N7/8 · 0.1µF · face → row 20", "R"),
-    ("L10", "L10 · PSX ACK → pin 31", "R"),
-    ("L11", "L11 · empty", "R"),
-    ("L12", "L12 · PSX CLK → pin 29", "R"),
-    ("L13", "L13 · PSX GND → pin 28", "R"),
-    ("L14", "L14 · PSX ATT → pin 27", "R"),
-    ("L15", "L15 · PSX CMD → pin 26", "R"),
-    ("L16", "L16 · PSX DATA → pin 25", "R"),
-    ("N18", "N17–19 · DC ground, sense, shield", "R"),
+    ("K10", "K10 · PSX pin 9, ACK → pin 31", "R"),
+    ("K12", "K12 · PSX pin 7, CLK → pin 29", "R"),
+    ("K13", "K13 · PSX pin 4, GND → pin 28", "R"),
+    ("K14", "K14 · PSX pin 6, ATT → pin 27", "R"),
+    ("K15", "K15 · PSX pin 2, CMD → pin 26", "R"),
+    ("K16", "K16 · PSX pin 1, DATA → pin 25", "R"),
+    ("N18", "N17–19 · DC pins 3, 4, shield", "R"),
 ]
 BOT_LABELS = [
-    ("A10", "A10→A11, A18→A19 · DC wire ends", "L"),
+    ("A10", "A10→A11, A18→A19 · DC data wires", "L"),
     ("A14", "A14→C14, A15→C15 · to pins 14, 15", "L"),
     ("K1", "K1–N1 · ground bus (bare)", "R"),
-    ("N2", "J2→N2→N3 · VSYS, insulated", "R"),
+    ("M2", "J2→N3 · VSYS, insulated", "R"),
     ("J3", "J3–K3 · pin 38 → ground", "R"),
     ("L4", "L3–L6 · IN link (bare)", "R"),
     ("N5", "N3–N6 · OUT link (bare)", "R"),
     ("K6", "K1–K9 · ground spur (bare)", "R"),
     ("M8", "M6–M9 · leg 2 → ground", "R"),
     ("K9", "K9–N9 · ground bus (bare)", "R"),
-    ("L13", "L→J ×6 · PSX wire ends", "R"),
+    ("K13", "K→J ×6 · PSX wire ends", "R"),
     ("N15", "N9–N20 · ground spur (bare)", "R"),
 ]
 
@@ -254,7 +253,7 @@ def build(view, theme):
     # legend
     ly = Y0 + (NROWS - 1) * P + 40
     if view == "top":
-        items = [("teal", "Dreamcast"), ("purple", "PlayStation"), ("coral", "power parts"), ("gray", "not connected"), ("red", "pin 39, 5V")]
+        items = [("teal", "Dreamcast"), ("purple", "PlayStation"), ("coral", "power parts"), ("gray", "ground"), ("red", "pin 39, 5V")]
     else:
         items = [("bus", "buses, bare wire"), ("rail", "ground, bare wire"), ("link", "short links, bare"), ("ins", "insulated wire")]
     lx = 40

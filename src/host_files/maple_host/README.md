@@ -99,6 +99,31 @@ direction buffer (DreamPicoPort's "simple configuration"). That's why
 `MapleBus` is constructed with `dirPin = -1`. The RP2040's internal pull-ups
 are enough; no external pull-ups are needed.
 
+Full pin tables, the power section and the board layout are in
+[`docs/wiring.md`](../../../docs/wiring.md).
+
+## Behaviour on this build
+
+These live in `src/main.c` and `src/convert_data.c`:
+
+- **Output chosen at boot from VBUS (GPIO24).** No USB power means the
+  console is powering the adapter, so it acts as a PS1/PS2 pad. USB power
+  means a PC, so it uses the USB mode from the web config (a saved PS1/PS2
+  setting is mapped to Xinput). There's no mode switch.
+- **Starts as a digital pad (`0x41`).** Holding A + B + X + Y + Start for about
+  a third of a second toggles to analog (`0x73`) and back. The BIOS menu and
+  some games refuse an analog pad, the same as with a DualShock in analog
+  mode, so digital is the default.
+- **Analog stick on the D-pad.** In digital mode, moving the left stick past
+  about 20% also presses the D-pad, so a standard Dreamcast controller works
+  in digital-only games.
+- **LED as a diagnostic.** Slow blink: no Maple device answering. Solid:
+  controller detected, but no pad poll from the console yet. Groups of N
+  blinks: N is the number of bytes the adapter received from the console in
+  the last pad poll. That's 4 for a digital poll and 8 for analog, one less
+  than the full 5- and 9-byte transactions, because the count is taken just
+  before the last byte arrives.
+
 ## PS1 timing changes
 
 These are in the PS1/PS2 device code, not here, but they were needed to use a
@@ -112,3 +137,10 @@ Dreamcast controller on a PS1:
   controller.
 - **Clock divider.** The PSX device PIO divider was changed from 50 to 96 to
   get back to the intended 2.5 MHz at the 240 MHz system clock.
+
+## Possible future work
+
+- A Schottky diode from the regulator's output to its input, so USB and a
+  powered-off console can't conflict.
+- A Saturn output mode. Saturn controllers use a plain GPIO nibble protocol,
+  so it wouldn't need a PIO block.

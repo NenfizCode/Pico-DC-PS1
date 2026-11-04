@@ -346,14 +346,14 @@ text { font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif; 
 <polyline points="200,190 200,170" fill="none" stroke="#85B7EB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
 <polyline points="200,210 200,230" fill="none" stroke="#85B7EB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
 <polyline points="220,170 220,230" fill="none" stroke="#85B7EB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-<polyline points="220,130 200,130" fill="none" stroke="#85B7EB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-<polyline points="280,90 200,90 200,110" fill="none" stroke="#ED93B1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 4"/>
-<polyline points="240,250 280,250" fill="none" stroke="#85B7EB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-<polyline points="240,290 280,290" fill="none" stroke="#85B7EB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-<polyline points="240,310 280,310" fill="none" stroke="#85B7EB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-<polyline points="240,330 280,330" fill="none" stroke="#85B7EB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-<polyline points="240,350 280,350" fill="none" stroke="#85B7EB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-<polyline points="240,370 280,370" fill="none" stroke="#85B7EB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="200,90 200,110" fill="none" stroke="#85B7EB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="280,90 220,90 200,110" fill="none" stroke="#ED93B1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 4"/>
+<polyline points="260,250 280,250" fill="none" stroke="#85B7EB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="260,290 280,290" fill="none" stroke="#85B7EB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="260,310 280,310" fill="none" stroke="#85B7EB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="260,330 280,330" fill="none" stroke="#85B7EB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="260,350 280,350" fill="none" stroke="#85B7EB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="260,370 280,370" fill="none" stroke="#85B7EB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
 <polyline points="460,250 460,270" fill="none" stroke="#85B7EB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
 <polyline points="460,330 420,330" fill="none" stroke="#85B7EB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
 <polyline points="460,350 420,350" fill="none" stroke="#85B7EB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -362,13 +362,13 @@ text { font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif; 
 <g class="teal"><circle cx="460" cy="250" r="5"/></g>
 <g class="teal"><circle cx="460" cy="430" r="5"/></g>
 <g class="purple"><circle cx="240" cy="130" r="5"/></g>
-<g class="teal"><circle cx="220" cy="130" r="5"/></g>
-<g class="purple"><circle cx="240" cy="250" r="5"/></g>
-<g class="purple"><circle cx="240" cy="290" r="5"/></g>
-<g class="purple"><circle cx="240" cy="310" r="5"/></g>
-<g class="purple"><circle cx="240" cy="330" r="5"/></g>
-<g class="purple"><circle cx="240" cy="350" r="5"/></g>
-<g class="purple"><circle cx="240" cy="370" r="5"/></g>
+<g class="teal"><circle cx="200" cy="90" r="5"/></g>
+<g class="purple"><circle cx="260" cy="250" r="5"/></g>
+<g class="purple"><circle cx="260" cy="290" r="5"/></g>
+<g class="purple"><circle cx="260" cy="310" r="5"/></g>
+<g class="purple"><circle cx="260" cy="330" r="5"/></g>
+<g class="purple"><circle cx="260" cy="350" r="5"/></g>
+<g class="purple"><circle cx="260" cy="370" r="5"/></g>
 <g class="teal"><circle cx="200" cy="390" r="5"/></g>
 <g class="teal"><circle cx="200" cy="410" r="5"/></g>
 <g class="teal"><circle cx="200" cy="430" r="5"/></g>
@@ -380,9 +380,7 @@ text { font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif; 
 <g class="teal"><circle cx="420" cy="330" r="5.5"/></g>
 <g class="teal"><circle cx="420" cy="350" r="5.5"/></g>
 <g class="red"><circle cx="280" cy="90" r="5.5"/></g>
-<g class="teal"><circle cx="280" cy="110" r="5.5"/></g>
-<g class="gray"><circle cx="280" cy="130" r="5.5"/></g>
-<g class="gray"><circle cx="280" cy="150" r="5.5"/></g>
+<g class="gray"><circle cx="280" cy="110" r="5.5"/></g>
 <g class="purple"><circle cx="280" cy="250" r="5.5"/></g>
 <g class="purple"><circle cx="280" cy="290" r="5.5"/></g>
 <g class="purple"><circle cx="280" cy="310" r="5.5"/></g>
@@ -390,13 +388,13 @@ text { font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif; 
 <g class="purple"><circle cx="280" cy="350" r="5.5"/></g>
 <g class="purple"><circle cx="280" cy="370" r="5.5"/></g>
 <line class="leader" x1="467" y1="250" x2="486" y2="250"/>
-<text class="tt t" x="490" y="254">A10→A11, A18→A19 · DC wire ends</text>
+<text class="tt t" x="490" y="254">A10→A11, A18→A19 · DC data wires</text>
 <line class="leader" x1="467" y1="330" x2="486" y2="330"/>
 <text class="tt t" x="490" y="334">A14→C14, A15→C15 · to pins 14, 15</text>
 <line class="leader" x1="253" y1="70" x2="164" y2="70"/>
 <text class="tt t" x="160" y="74" text-anchor="end">K1–N1 · ground bus (bare)</text>
-<line class="leader" x1="193" y1="90" x2="164" y2="90"/>
-<text class="tt t" x="160" y="94" text-anchor="end">J2→N2→N3 · VSYS, insulated</text>
+<line class="leader" x1="213" y1="90" x2="164" y2="90"/>
+<text class="tt t" x="160" y="94" text-anchor="end">J2→N3 · VSYS, insulated</text>
 <line class="leader" x1="273" y1="110" x2="164" y2="110"/>
 <text class="tt t" x="160" y="114" text-anchor="end">J3–K3 · pin 38 → ground</text>
 <line class="leader" x1="233" y1="130" x2="164" y2="130"/>
@@ -409,8 +407,8 @@ text { font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif; 
 <text class="tt t" x="160" y="214" text-anchor="end">M6–M9 · leg 2 → ground</text>
 <line class="leader" x1="253" y1="230" x2="164" y2="230"/>
 <text class="tt t" x="160" y="234" text-anchor="end">K9–N9 · ground bus (bare)</text>
-<line class="leader" x1="233" y1="310" x2="164" y2="310"/>
-<text class="tt t" x="160" y="314" text-anchor="end">L→J ×6 · PSX wire ends</text>
+<line class="leader" x1="253" y1="310" x2="164" y2="310"/>
+<text class="tt t" x="160" y="314" text-anchor="end">K→J ×6 · PSX wire ends</text>
 <line class="leader" x1="193" y1="350" x2="164" y2="350"/>
 <text class="tt t" x="160" y="354" text-anchor="end">N9–N20 · ground spur (bare)</text>
 <line x1="40" y1="487" x2="54" y2="487" stroke="#F0997B" stroke-width="3"/>

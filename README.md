@@ -110,7 +110,7 @@ refuse analog pads entirely, same as with a DualShock in analog mode.
 | LED | Meaning |
 |---|---|
 | Slow blink | No Dreamcast controller detected |
-| Groups of blinks | Controller detected and the console is reading the adapter. 5 blinks = digital, 9 = analog |
+| Groups of blinks | Controller detected and the console is reading the adapter. 4 blinks = digital, 8 = analog |
 | Solid | Controller detected, but the console isn't reading the adapter |
 
 ---
@@ -150,8 +150,8 @@ refuse analog pads entirely, same as with a DualShock in analog mode.
 > Dreamcast pin 2 is +5V. Keep it away from every GPIO, it only goes to the
 > regulator output and VSYS. The RP2040 isn't 5V tolerant.
 >
-> PSX pin 5 is the console's 3.3V line and isn't used. Cut it short and
-> insulate it, or it can short the console.
+> PSX pin 5 is the console's 3.3V line and isn't used. Leave a short stub
+> and cover it with heatshrink, or it can short the console.
 >
 > Identify every wire with a multimeter before soldering. Cables differ, so
 > don't rely on anyone else's wiring notes for which wire is which.
@@ -176,8 +176,9 @@ console's 7.6V for the controller and the Pico's VSYS pin. Details in
   which wire is which, the power circuit, and checks to do before powering on.
 - [`docs/assembly.md`](./docs/assembly.md): soldering order for the
   protoboard.
-- [`docs/board-layout.py`](./docs/board-layout.py): generates the board
-  diagrams below.
+- [`docs/board-layout.py`](./docs/board-layout.py) and
+  [`docs/pin-map.py`](./docs/pin-map.py): generate the board diagrams and
+  the pin map.
 
 | Component side | Solder side (mirrored) |
 |---|---|
@@ -255,6 +256,10 @@ console on.
   getting 5V.
 - **LED solid, console doesn't respond.** Check the DATA, CMD, ATT, CLK, ACK
   and ground wires on the PS1 side.
+- **LED dark at power-on.** Reseat the PS1 plug first.
+- **Regulator input and output both read about 3V.** The console's fuse on the
+  7.6V line has tripped. Unplug and let it cool, or try another port. See
+  [wiring.md](./docs/wiring.md#the-consoles-76v-fuse).
 - **Game ignores the controller in analog mode.** Switch to digital. Some
   games only take digital pads.
 - **Input drops out.** Try 33 Ω resistors instead of 10 Ω. If that doesn't
