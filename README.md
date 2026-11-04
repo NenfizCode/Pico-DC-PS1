@@ -22,9 +22,11 @@ menu and in games that use the standard pad driver.
 - **Dreamcast in, PlayStation out.** Reads a Dreamcast controller or arcade
   stick and presents it as a PS1/PS2 digital pad (or an analog pad if you
   choose that mode).
-- **Picks its output automatically.** Powered by the console, it acts as a
-  PlayStation pad. Plugged into a PC by USB, it acts as a USB gamepad (Xinput
-  by default; other USB modes can be chosen in the web configuration page).
+- **Picks its output automatically** *(untested)*. Powered by the console,
+  it acts as a PlayStation pad. Plugged into a PC by USB, it should act as a
+  USB gamepad (Xinput by default; other USB modes can be chosen in the web
+  configuration page). The code is in place but hasn't been tried on hardware
+  yet.
 - **Powered by the console.** A 5V regulator runs off the PlayStation port's
   7.6V rail and powers both the Pico and the Dreamcast stick. No external
   power and no USB cable needed in the console.
@@ -39,8 +41,9 @@ menu and in games that use the standard pad driver.
 
 | Where | What | Result |
 |---|---|---|
-| PS1 (original "fat" model) | Console startup menu, Soul Edge, King of Fighters '96 | Working |
-| PC (Xinput) | Super Smash Bros. Melee | Working |
+| PS1 (original "fat" model), console-powered | BIOS / startup menu and every game tried, including Soul Edge and King of Fighters '96 | Working, no known issues |
+| PC (Xinput) | Super Smash Bros. Melee | Worked before the automatic output switch was added; not retested since |
+| Automatic PS1 / USB switch | | Not yet tested |
 | Input | Dreamcast arcade stick | Working |
 
 ---
@@ -72,7 +75,8 @@ Dreamcast stick ──Maple bus──▶ Pico (RP2040) ──PS1 pad bus──�
 - **Choosing the output.** At boot the firmware reads GPIO24, which carries
   the Pico's USB VBUS line. No USB power means the Pico is running from the
   console, so it acts as a PS1 pad. USB power means a PC is attached, so it
-  uses the USB mode saved in the web configuration page.
+  uses the USB mode saved in the web configuration page. The console side of
+  this is confirmed; the USB side hasn't been tested yet.
 
 ---
 
@@ -237,7 +241,8 @@ The input mode is stored in the Pico's flash, so this only needs doing once.
    PC (Xinput is a good default). Click **Save**.
 
 You don't need to pick PS1/PS2 as the Device. The adapter switches to PS1/PS2
-on its own whenever it's powered by the console.
+on its own whenever it's powered by the console. Switching to the USB mode when
+plugged into a PC is implemented but not yet tested.
 
 ### 4. Play
 
