@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="490" viewBox="0 0 680 490" role="img">
+<title>Pico pin map for the Dreamcast to PlayStation adapter</title>
+<desc>Raspberry Pi Pico drawn top-down with USB at the top. Header pins that get soldered are highlighted and labelled with pin number, GPIO name, and which cable wire plugs into each one. Pin 39 is the only pin that may carry 5 volts.</desc>
+<style>
+text { font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+.th { font-size: 14px; font-weight: 600; }
+.ts { font-size: 12px; font-weight: 400; }
+.leader { stroke: #6b6a65; stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+.gray  rect { fill: #444441; stroke: #B4B2A9; stroke-width: 1; }
+.gray  .th  { fill: #F1EFE8; } .gray  .ts { fill: #B4B2A9; }
+.teal  rect { fill: #085041; stroke: #5DCAA5; stroke-width: 1; }
+.teal  .th  { fill: #E1F5EE; } .teal  .ts { fill: #9FE1CB; }
+.purple rect { fill: #3C3489; stroke: #AFA9EC; stroke-width: 1; }
+.purple .th { fill: #EEEDFE; } .purple .ts { fill: #CECBF6; }
+.red   rect { fill: #791F1F; stroke: #F09595; stroke-width: 1.5; }
+.red   .th  { fill: #FCEBEB; } .red   .ts { fill: #F7C1C1; }
+.pin-gray   { fill: #888780; stroke: #D3D1C7; stroke-width: 1; }
+.pin-teal   { fill: #1D9E75; stroke: #9FE1CB; stroke-width: 1; }
+.pin-purple { fill: #7F77DD; stroke: #CECBF6; stroke-width: 1; }
+.pin-red    { fill: #E24B4A; stroke: #F7C1C1; stroke-width: 1; }
+.pin-unused { fill: #2C2C2A; stroke: #6b6a65; stroke-width: 1; }
+</style>
+<rect x="0" y="0" width="680" height="490" fill="#1b1b1a"/>
+<rect x="250" y="40" width="180" height="405" rx="10" fill="#2C2C2A" stroke="#6b6a65" stroke-width="1"/>
+<g class="gray"><rect x="312" y="30" width="56" height="26" rx="3"/><text class="ts" x="340" y="47" text-anchor="middle">USB</text></g>
+<g class="pin-unused">
+<circle cx="263" cy="138" r="2.5"/><circle cx="263" cy="157" r="2.5"/><circle cx="263" cy="176" r="2.5"/><circle cx="263" cy="195" r="2.5"/><circle cx="263" cy="214" r="2.5"/><circle cx="263" cy="233" r="2.5"/><circle cx="263" cy="252" r="2.5"/><circle cx="263" cy="271" r="2.5"/><circle cx="263" cy="347" r="2.5"/><circle cx="263" cy="366" r="2.5"/><circle cx="263" cy="385" r="2.5"/><circle cx="263" cy="404" r="2.5"/><circle cx="263" cy="423" r="2.5"/>
+<circle cx="417" cy="62" r="2.5"/><circle cx="417" cy="157" r="2.5"/><circle cx="417" cy="176" r="2.5"/><circle cx="417" cy="195" r="2.5"/><circle cx="417" cy="214" r="2.5"/><circle cx="417" cy="366" r="2.5"/><circle cx="417" cy="385" r="2.5"/><circle cx="417" cy="404" r="2.5"/><circle cx="417" cy="423" r="2.5"/>
+</g>
+<g class="pin-gray"><circle cx="263" cy="62" r="5"/><circle cx="263" cy="81" r="5"/><circle cx="263" cy="100" r="5"/><circle cx="263" cy="119" r="5"/><circle cx="417" cy="119" r="5"/><circle cx="417" cy="138" r="5"/><circle cx="417" cy="252" r="5"/><circle cx="417" cy="290" r="5"/></g>
+<g class="pin-teal"><circle cx="263" cy="290" r="5"/><circle cx="263" cy="309" r="5"/><circle cx="263" cy="328" r="5"/><circle cx="417" cy="100" r="5"/></g>
+<g class="pin-red"><circle cx="417" cy="81" r="5"/></g>
+<g class="pin-purple"><circle cx="417" cy="233" r="5"/><circle cx="417" cy="271" r="5"/><circle cx="417" cy="309" r="5"/><circle cx="417" cy="328" r="5"/><circle cx="417" cy="347" r="5"/></g>
+<g class="leader">
+<line x1="258" y1="62" x2="240" y2="62"/><line x1="258" y1="81" x2="240" y2="98"/><line x1="258" y1="100" x2="240" y2="134"/><line x1="258" y1="119" x2="240" y2="170"/><line x1="258" y1="290" x2="240" y2="290"/><line x1="258" y1="309" x2="240" y2="326"/><line x1="258" y1="328" x2="240" y2="362"/>
+<line x1="422" y1="81" x2="440" y2="72"/><line x1="422" y1="100" x2="440" y2="108"/><line x1="422" y1="119" x2="440" y2="144"/><line x1="422" y1="138" x2="440" y2="180"/><line x1="422" y1="233" x2="440" y2="230"/><line x1="422" y1="252" x2="440" y2="266"/><line x1="422" y1="271" x2="440" y2="302"/><line x1="422" y1="290" x2="440" y2="338"/><line x1="422" y1="309" x2="440" y2="374"/><line x1="422" y1="328" x2="440" y2="410"/><line x1="422" y1="347" x2="440" y2="446"/>
+</g>
+<g class="gray"><rect x="40" y="46" width="200" height="32" rx="4"/><text class="th" x="48" y="60">1 · GP0</text><text class="ts" x="48" y="73">Serial cable white (TX)</text></g>
+<g class="gray"><rect x="40" y="82" width="200" height="32" rx="4"/><text class="th" x="48" y="96">2 · GP1</text><text class="ts" x="48" y="109">Reserved, serial RX</text></g>
+<g class="gray"><rect x="40" y="118" width="200" height="32" rx="4"/><text class="th" x="48" y="132">3 · GND</text><text class="ts" x="48" y="145">Serial cable black</text></g>
+<g class="gray"><rect x="40" y="154" width="200" height="32" rx="4"/><text class="th" x="48" y="168">4 · GP2</text><text class="ts" x="48" y="181">Reserved, mode switch</text></g>
+<g class="teal"><rect x="40" y="274" width="200" height="32" rx="4"/><text class="th" x="48" y="288">13 · GND</text><text class="ts" x="48" y="301">DC blue</text></g>
+<g class="teal"><rect x="40" y="310" width="200" height="32" rx="4"/><text class="th" x="48" y="324">14 · GP10</text><text class="ts" x="48" y="337">10Ω → DC red, data A</text></g>
+<g class="teal"><rect x="40" y="346" width="200" height="32" rx="4"/><text class="th" x="48" y="360">15 · GP11</text><text class="ts" x="48" y="373">10Ω → DC orange, data B</text></g>
+<g class="red"><rect x="440" y="56" width="200" height="32" rx="4"/><text class="th" x="448" y="70">39 · VSYS — only 5V pin</text><text class="ts" x="448" y="83">DC green (+5V) · regulator out</text></g>
+<g class="teal"><rect x="440" y="92" width="200" height="32" rx="4"/><text class="th" x="448" y="106">38 · GND</text><text class="ts" x="448" y="119">DC white · regulator GND</text></g>
+<g class="gray"><rect x="440" y="128" width="200" height="32" rx="4"/><text class="th" x="448" y="142">37 · 3V3_EN</text><text class="ts" x="448" y="155">Do not connect anything</text></g>
+<g class="gray"><rect x="440" y="164" width="200" height="32" rx="4"/><text class="th" x="448" y="178">36 · 3V3 out</text><text class="ts" x="448" y="191">1kΩ pull-ups, if needed</text></g>
+<g class="purple"><rect x="440" y="214" width="200" height="32" rx="4"/><text class="th" x="448" y="228">31 · GP26</text><text class="ts" x="448" y="241">PSX green, ACK</text></g>
+<g class="gray"><rect x="440" y="250" width="200" height="32" rx="4"/><text class="th" x="448" y="264">30 · RUN</text><text class="ts" x="448" y="277">Reset button, optional</text></g>
+<g class="purple"><rect x="440" y="286" width="200" height="32" rx="4"/><text class="th" x="448" y="300">29 · GP22</text><text class="ts" x="448" y="313">PSX blue, CLK</text></g>
+<g class="gray"><rect x="440" y="322" width="200" height="32" rx="4"/><text class="th" x="448" y="336">28 · GND</text><text class="ts" x="448" y="349">PSX black · DC grey shield</text></g>
+<g class="purple"><rect x="440" y="358" width="200" height="32" rx="4"/><text class="th" x="448" y="372">27 · GP21</text><text class="ts" x="448" y="385">PSX yellow, ATT</text></g>
+<g class="purple"><rect x="440" y="394" width="200" height="32" rx="4"/><text class="th" x="448" y="408">26 · GP20</text><text class="ts" x="448" y="421">PSX orange, CMD</text></g>
+<g class="purple"><rect x="440" y="430" width="200" height="32" rx="4"/><text class="th" x="448" y="444">25 · GP19</text><text class="ts" x="448" y="457">PSX brown, DATA</text></g>
+</svg>

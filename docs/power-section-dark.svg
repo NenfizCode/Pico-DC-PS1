@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="380" viewBox="0 0 680 380" role="img">
+<title>Power section for the Dreamcast to PlayStation adapter</title>
+<desc>BA50DD0T regulator with its three legs, input and output capacitor pairs, the 7.6V feed from the PlayStation cable into leg 1, the 5V node on leg 3 feeding Pico pin 39 and the Dreamcast socket, and one ground rail joining leg 2, both capacitor pairs, the PlayStation ground and Pico pin 38.</desc>
+<style>
+text { font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+.th { font-size: 14px; font-weight: 600; }
+.ts { font-size: 12px; font-weight: 400; }
+.wire line, .wire polyline { fill: none; stroke-width: 1.5; }
+.rail { stroke-width: 2.5; fill: none; }
+.wire line, .wire polyline, .rail { stroke: #9a988f; }
+.gray  rect { fill: #444441; stroke: #B4B2A9; stroke-width: 1; } .gray  .th { fill: #F1EFE8; } .gray  .ts { fill: #B4B2A9; }
+.teal  rect { fill: #085041; stroke: #5DCAA5; stroke-width: 1; } .teal  .th { fill: #E1F5EE; } .teal  .ts { fill: #9FE1CB; }
+.purple rect { fill: #3C3489; stroke: #AFA9EC; stroke-width: 1; } .purple .th { fill: #EEEDFE; } .purple .ts { fill: #CECBF6; }
+.coral rect { fill: #712B13; stroke: #F0997B; stroke-width: 1; } .coral .th { fill: #FAECE7; } .coral .ts { fill: #F5C4B3; }
+.red   rect { fill: #791F1F; stroke: #F09595; stroke-width: 1.5; } .red   .th { fill: #FCEBEB; } .red   .ts { fill: #F7C1C1; }
+</style>
+<rect x="0" y="0" width="680" height="380" fill="#1b1b1a"/>
+<line x1="140" y1="300" x2="560" y2="300" class="rail"/>
+<g class="wire">
+<line x1="290" y1="130" x2="290" y2="160"/><line x1="340" y1="130" x2="340" y2="160"/><line x1="390" y1="130" x2="390" y2="160"/>
+<line x1="250" y1="174" x2="267" y2="174"/><line x1="413" y1="174" x2="470" y2="174"/>
+<line x1="450" y1="100" x2="450" y2="174"/><line x1="450" y1="100" x2="470" y2="100"/>
+<line x1="340" y1="188" x2="340" y2="300"/>
+<polyline points="290,188 290,200 175,200 175,206"/><polyline points="390,188 390,200 515,200 515,206"/>
+<line x1="175" y1="270" x2="175" y2="318"/><line x1="515" y1="270" x2="515" y2="318"/>
+</g>
+<g class="coral"><rect x="260" y="60" width="160" height="70" rx="6"/><text class="th" x="340" y="84" text-anchor="middle">BA50DD0T</text><text class="ts" x="340" y="101" text-anchor="middle">marked face toward you</text><text class="ts" x="340" y="116" text-anchor="middle">pin 1 is on the left</text></g>
+<g class="coral"><rect x="267" y="160" width="46" height="28" rx="4"/><text class="th" x="290" y="178" text-anchor="middle">1 IN</text></g>
+<g class="coral"><rect x="317" y="160" width="46" height="28" rx="4"/><text class="th" x="340" y="178" text-anchor="middle">2 GND</text></g>
+<g class="red"><rect x="367" y="160" width="46" height="28" rx="4"/><text class="th" x="390" y="178" text-anchor="middle">3 OUT</text></g>
+<g class="purple"><rect x="80" y="158" width="170" height="32" rx="4"/><text class="th" x="88" y="172">PSX purple</text><text class="ts" x="88" y="185">7.6V from the console</text></g>
+<g class="red"><rect x="470" y="84" width="170" height="32" rx="4"/><text class="th" x="478" y="98">Pico pin 39 · VSYS</text><text class="ts" x="478" y="111">the only 5V pin</text></g>
+<g class="teal"><rect x="470" y="158" width="170" height="32" rx="4"/><text class="th" x="478" y="172">DC green</text><text class="ts" x="478" y="185">+5V to the stick</text></g>
+<g class="coral"><rect x="80" y="206" width="190" height="64" rx="4"/><text class="th" x="88" y="221">Input capacitors</text><text class="ts" x="88" y="234">10µF electrolytic</text><text class="ts" x="88" y="247">+ leg up · stripe down</text><text class="ts" x="88" y="260">0.1µF ceramic, either way</text></g>
+<g class="coral"><rect x="420" y="206" width="190" height="64" rx="4"/><text class="th" x="428" y="221">Output capacitors</text><text class="ts" x="428" y="234">100µF electrolytic</text><text class="ts" x="428" y="247">+ leg up · stripe down</text><text class="ts" x="428" y="260">0.1µF ceramic, either way</text></g>
+<g class="purple"><rect x="80" y="318" width="190" height="32" rx="4"/><text class="th" x="88" y="332">PSX black</text><text class="ts" x="88" y="345">ground from the console</text></g>
+<g class="gray"><rect x="420" y="318" width="190" height="32" rx="4"/><text class="th" x="428" y="332">Pico pin 38 · GND</text><text class="ts" x="428" y="345">power ground</text></g>
+</svg>
