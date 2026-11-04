@@ -8,6 +8,12 @@ by Loc15, which already had PS1/PS2 controller emulation, USB modes and a web
 config page. This adds Dreamcast (Maple bus) input and fixes the PS1 timing so
 the BIOS and every game accept it.
 
+> [!NOTE]
+> I'm not an electronics or embedded developer and don't have much background
+> in this. Everything here was put together by referencing other projects and
+> with help from AI as I built it. That said, the finished adapter works as
+> described in the wiring and assembly docs.
+
 ![The finished adapter plugged into a PS1](./docs/media/build-finished.jpg)
 
 [![Demo video](./docs/media/demo-thumb.jpg)](./docs/media/demo.mp4)
