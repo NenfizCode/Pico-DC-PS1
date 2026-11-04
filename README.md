@@ -13,7 +13,11 @@ modes and the web configuration page. This project adds a Dreamcast (Maple bus)
 input mode and fixes to the PS1 side that make it work in the console's own
 menu and in games that use the standard pad driver.
 
-![Pico pin map](./docs/pico-pin-map.svg)
+![The finished adapter plugged into a PS1](./docs/media/build-finished.jpg)
+
+[![Demo video: a Dreamcast stick playing a PS1 game through the adapter](./docs/media/demo-thumb.jpg)](./docs/media/demo.mp4)
+
+*Click the image above to watch a short demo (25 seconds, no sound).*
 
 ---
 
@@ -142,6 +146,8 @@ before toggling again.
 
 ### Pin map
 
+![Pico pin map](./docs/pico-pin-map.svg)
+
 | Pico pin | GPIO | Connects to |
 |---|---|---|
 | 14 | GPIO10 | Dreamcast Data A (SDCKA), through 10 Ω |
@@ -174,6 +180,16 @@ console's logic rail alone. It also lets you keep USB plugged in while the
 adapter runs in a powered console, which is useful for serial debugging.
 
 ![Power section](./docs/power-section.svg)
+
+### Build photos
+
+| Before wiring | Finished |
+|---|---|
+| ![The board in its case with both cables in, before wiring](./docs/media/build-pre-wiring.jpg) | ![The finished, wired adapter connected to a PS1](./docs/media/build-finished.jpg) |
+
+The Pico sits on the prototyping board inside a small clear case, with the
+PlayStation cable and the Dreamcast extension cable both coming in from the
+top.
 
 ### Full build documentation
 
